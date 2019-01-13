@@ -6,12 +6,13 @@ import SideDrawer from "./navigation/SideDrawer";
 
 export class Layout extends React.Component {
   state = {
-    isOpen: true
+    isOpen: false
   };
 
-  sideDrawerToggler = () => {
-    const currentState = this.state.isOpen;
-    this.setState({ isOpen: !currentState });
+  sideDrawerToggleHandler = () => {
+    this.setState(prevState => {
+      return { isOpen: !prevState.isOpen };
+    });
   };
 
   sideDrawerCloseHandler = () => {
@@ -21,7 +22,7 @@ export class Layout extends React.Component {
   render() {
     return (
       <Wrap>
-        <Toolbar sideDrawerToggler={this.sideDrawerToggler} />
+        <Toolbar sideDrawerToggler={this.sideDrawerToggleHandler} />
         <SideDrawer
           isOpen={this.state.isOpen}
           closeHandler={this.sideDrawerCloseHandler}

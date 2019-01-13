@@ -11,7 +11,6 @@ const SideDrawer = props => {
   if (props.isOpen) {
     attachedClasses = [classes.SideDrawer, classes.Open];
   }
-
   return (
     <Wrap>
       <Backdrop show={props.isOpen} clicked={props.closeHandler} />

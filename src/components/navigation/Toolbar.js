@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import classes from "./Toolbar.css";
 import Logo from "../ui/Logo";
 import NavItems from "./NavItems";
-import Button from "../ui/Button";
+import SideDrawerToggle from "./SideDrawerToggle";
 
 const Toolbar = props => {
   return (
     <header className={classes.Toolbar}>
-      <Button buttonType="Normal" clickHandler={props.sideDrawerToggler}>
-        MENU
-      </Button>
+      <SideDrawerToggle clickHandler={props.sideDrawerToggler} />
       <div className={classes.Logo}>
         <Logo />
       </div>
