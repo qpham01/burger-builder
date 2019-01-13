@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import Wrap from "../components/Wrap";
-import Burger from "../components/burger/Burger";
-import BuildControls from "../components/burger/BuildControls";
+import Wrap from "../Wrap";
+import Burger from "../burger/Burger";
+import BuildControls from "../burger/BuildControls";
+import Modal from "../ui/Modal";
+import OrderSummary from "../burger/OrderSummary";
 
 const ingredientPrices = {
   salad: 0.5,
@@ -19,7 +21,8 @@ class BurgerBuilder extends Component {
       salad: 0
     },
     totalPrice: 4,
-    canOrder: false
+    canOrder: false,
+    ordering: false
   };
 
   ingredientSum = ingredients => {
@@ -72,6 +75,18 @@ class BurgerBuilder extends Component {
     });
   };
 
+  orderHandler = () => {
+    this.setState({ ordering: true });
+  };
+
+  cancelOrderHandler = () => {
+    this.setState({ ordering: false });
+  };
+
+  continueOrderHandler = () => {
+    console.log("Continue order");
+  };
+
   render() {
     const disabledInfo = { ...this.state.ingredients };
     for (let key in disabledInfo) {
@@ -79,10 +94,19 @@ class BurgerBuilder extends Component {
     }
     return (
       <Wrap>
+        <Modal show={this.state.ordering} close={this.cancelOrderHandler}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            cancelOrder={this.cancelOrderHandler}
+            continueOrder={this.continueOrderHandler}
+            price={this.state.totalPrice}
+          />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           addHandler={this.addIngredientHandler}
           removeHandler={this.removeIngredientHandler}
+          ordered={this.orderHandler}
           disabled={disabledInfo}
           price={this.state.totalPrice}
           canOrder={this.state.canOrder}

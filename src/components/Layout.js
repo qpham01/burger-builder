@@ -1,12 +1,35 @@
 import React from "react";
 import Wrap from "./Wrap";
 import classes from "./Layout.css";
+import Toolbar from "./navigation/Toolbar";
+import SideDrawer from "./navigation/SideDrawer";
 
-const layout = props => (
-  <Wrap>
-    <div>Toolbar, SideDrawer, Backdrop</div>
-    <main className={classes.Content}>{props.children}</main>
-  </Wrap>
-);
+export class Layout extends React.Component {
+  state = {
+    isOpen: true
+  };
 
-export default layout;
+  sideDrawerToggler = () => {
+    const currentState = this.state.isOpen;
+    this.setState({ isOpen: !currentState });
+  };
+
+  sideDrawerCloseHandler = () => {
+    this.setState({ isOpen: false });
+  };
+
+  render() {
+    return (
+      <Wrap>
+        <Toolbar sideDrawerToggler={this.sideDrawerToggler} />
+        <SideDrawer
+          isOpen={this.state.isOpen}
+          closeHandler={this.sideDrawerCloseHandler}
+        />
+        <main className={classes.Content}>{this.props.children}</main>
+      </Wrap>
+    );
+  }
+}
+
+export default Layout;
