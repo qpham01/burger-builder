@@ -1,36 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Wrap from "../Wrap";
+import Wrap from "../containers/Wrap";
 import Button from "../ui/Button";
 
-const OrderSummary = props => {
-  const ingredientSummary = Object.keys(props.ingredients).map(igKey => {
+class OrderSummary extends React.Component {
+  // This could be a functional component... doesn't need this lifecycle nethod
+  // except for debugging.
+  componentWillUpdate() {
+    console.log("Will update");
+  }
+  render() {
+    const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
+      return (
+        <li key={igKey}>
+          <span style={{ textTransform: "capitalize" }}>{igKey}:</span>{" "}
+          {this.props.ingredients[igKey]}
+        </li>
+      );
+    });
+    // const price = "Total Price:   $" + this.props.price.toFixed(2);
     return (
-      <li key={igKey}>
-        <span style={{ textTransform: "capitalize" }}>{igKey}:</span>{" "}
-        {props.ingredients[igKey]}
-      </li>
+      <Wrap>
+        <h3>Your Order</h3>
+        <p>Delicious burger with the following ingredients:</p>
+        <ul>{ingredientSummary}</ul>
+        <p>
+          <strong>Total Price: ${this.props.price.toFixed(2)}</strong>
+        </p>
+        <p>Continue to checkout?</p>
+        <Button buttonType="Danger" clickHandler={this.props.cancelOrder}>
+          CANCEL
+        </Button>
+        <Button buttonType="Success" clickHandler={this.props.continueOrder}>
+          CONTINUE
+        </Button>
+      </Wrap>
     );
-  });
-  // const price = "Total Price:   $" + props.price.toFixed(2);
-  return (
-    <Wrap>
-      <h3>Your Order</h3>
-      <p>Delicious burger with the following ingredients:</p>
-      <ul>{ingredientSummary}</ul>
-      <p>
-        <strong>Total Price: ${props.price.toFixed(2)}</strong>
-      </p>
-      <p>Continue to checkout?</p>
-      <Button buttonType="Danger" clickHandler={props.cancelOrder}>
-        CANCEL
-      </Button>
-      <Button buttonType="Success" clickHandler={props.continueOrder}>
-        CONTINUE
-      </Button>
-    </Wrap>
-  );
-};
+  }
+}
 
 OrderSummary.propTypes = {
   ingredients: PropTypes.object.isRequired,

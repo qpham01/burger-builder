@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Wrap from "../Wrap";
+import Wrap from "./Wrap";
 import Burger from "../burger/Burger";
 import BuildControls from "../burger/BuildControls";
 import Modal from "../ui/Modal";

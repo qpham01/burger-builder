@@ -4,7 +4,7 @@ import Logo from "../ui/Logo";
 import NavItems from "./NavItems";
 import classes from "./SideDrawer.css";
 import Backdrop from "../ui/Backdrop";
-import Wrap from "../Wrap";
+import Wrap from "../containers/Wrap";
 
 const SideDrawer = props => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
