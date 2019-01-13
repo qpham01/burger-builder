@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Wrap from "../containers/Wrap";
+import Wrap from "../common/Wrap";
 import Button from "../ui/Button";
 
 class OrderSummary extends React.Component {

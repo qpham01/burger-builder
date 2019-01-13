@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "./Modal.css";
-import Wrap from "../containers/Wrap";
+import Wrap from "../common/Wrap";
 import Backdrop from "./Backdrop";
 
 class Modal extends React.Component {
@@ -12,7 +12,7 @@ class Modal extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextProps.show !== this.props.show ||
-      nextProps.children != this.props.children
+      nextProps.children !== this.props.children
     );
   }
 

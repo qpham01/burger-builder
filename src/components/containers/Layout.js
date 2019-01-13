@@ -1,6 +1,6 @@
 import React from "react";
-import Wrap from "./Wrap";
 import classes from "./Layout.css";
+import Wrap from "../common/Wrap";
 import Toolbar from "../navigation/Toolbar";
 import SideDrawer from "../navigation/SideDrawer";
 
